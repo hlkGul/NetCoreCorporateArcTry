@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Abstract
+namespace Core.Entities
 {
+    //her projede ortak olacagi icin core katmanına tasındı
     public interface IEntity
     {
     }
