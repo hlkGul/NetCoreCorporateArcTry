@@ -35,8 +35,8 @@ namespace WebAPI
             services.AddControllers();
             //arka planda referans olusturmamýzý saglar, singleton bellekte tek bir ornek olusturur butun clientlara ayný degeri gonderir
             //arka planda manageri new leyip constructor a verir. service gordugu yerde managerini new ler yerde 
-            services.AddSingleton<IProductService,ProductManager>();
-            services.AddSingleton<IProductDal, EfProductDal>();
+            //services.AddSingleton<IProductService,ProductManager>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
 
             services.AddSwaggerGen(c =>
             {
