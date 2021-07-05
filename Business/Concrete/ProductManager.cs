@@ -9,6 +9,9 @@ using DataAccess.Abstract;
 using Entities.DTOs;
 using Core.Utilities.Results;
 using Business.Constants;
+using FluentValidation;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 
 namespace Business.Concrete
 {
@@ -24,10 +27,12 @@ namespace Business.Concrete
         //AOP mimarisiyle business icinde business yazacagiz attiribute lar ile yapilir. Spring default saglar
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length <2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+            //business kodu ve validation kodları ayrı yapılmalıdır!!!
+            //iş kurallarına dahil edilip edilemeyecegini belirlemek icin validation gereklidir.
+
+
+            ValidationTool.Validate(new ProductValidator(), product);
+
             _productDal.Add(product);
             //IResulttan gelen result ı return ediyoruz.
             //Messages lar sabit olarak iş katmanından gelecek

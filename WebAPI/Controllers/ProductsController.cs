@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
         //naming convention
         //IoC ınversion of control (product service manager icin referans tutucu fakat bunu api katmanı cozumleyemez bu yüzden ioc yapisi kullanacagiz)
         //konfigürasyon oldugu icin .net kendisi giderek karsilik gelen bir container olup ulmadıgına karar verir
+        //autofac ile alternatif yapıya tasındı.IoC
         IProductService _productService;
 
         public ProductsController(IProductService productService)
