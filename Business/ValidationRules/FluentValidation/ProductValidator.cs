@@ -21,7 +21,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1);
             //bu sekilde bulunmayan kuralları kendimiz yazabiliriz. StartWithA bizim kendi yazacak oldugumuz method
             //with message ile kendi hata mesajımızı ekleyebilriz. 
-            RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("urunler a harfi ile baslamalı");
+            //RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("urunler a harfi ile baslamalı");
 
         }
         //arg parametresi bizim gondermis oldugumuz productname
