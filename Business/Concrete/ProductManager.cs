@@ -12,6 +12,7 @@ using Business.Constants;
 using FluentValidation;
 using Business.ValidationRules.FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -24,6 +25,8 @@ namespace Business.Concrete
         {
             _productDal = productDal;
         }
+        //add metodumuzda validation yok ama aspect ekleyerek bu islemi sagladık. AOP !!
+        [ValidationAspect(typeof(ProductValidator))]
         //AOP mimarisiyle business icinde business yazacagiz attiribute lar ile yapilir. Spring default saglar
         public IResult Add(Product product)
         {
@@ -31,7 +34,7 @@ namespace Business.Concrete
             //iş kurallarına dahil edilip edilemeyecegini belirlemek icin validation gereklidir.
 
 
-            ValidationTool.Validate(new ProductValidator(), product);
+            //ValidationTool.Validate(new ProductValidator(), product);
 
             _productDal.Add(product);
             //IResulttan gelen result ı return ediyoruz.

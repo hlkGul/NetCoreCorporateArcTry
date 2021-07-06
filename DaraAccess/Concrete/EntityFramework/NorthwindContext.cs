@@ -16,10 +16,11 @@ namespace DataAccess.Concrete.EntityFramework
         {
             optionsBuilder.UseSqlServer(@"Server = localhost,1433;Database = Northwind;User Id = sa; Password = Az500g90+ ;MultipleActiveResultSets=True; ");
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server = (localdb)\mssqllocaldb;Database = Northwind;Trusted_Connection=true ");
-        }
+        //bu yapıyı windows makinelerde kullanacagız.ayrı klasörleme yapılabilirdi
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Server = (localdb)\mssqllocaldb;Database = Northwind;Trusted_Connection=true ");
+        //}
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
