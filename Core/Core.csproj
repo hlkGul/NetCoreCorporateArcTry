@@ -10,6 +10,9 @@
     <PackageReference Include="Autofac" Version="6.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +25,13 @@
     <None Remove="Aspects\Autofac\Validation\" />
     <None Remove="Utilities\Business\" />
     <None Remove="Entities\Concrete\" />
+    <None Remove="Utilities\Security\" />
+    <None Remove="Utilities\Security\Hashing\" />
+    <None Remove="Utilities\Security\Encription\" />
+    <None Remove="Utilities\Security\JWT\" />
+    <None Remove="Microsoft.IdentityModel.Tokens" />
+    <None Remove="Microsoft.Extensions.Configuration" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\Interceptors\" />
@@ -30,5 +40,9 @@
     <Folder Include="Aspects\Autofac\Validation\" />
     <Folder Include="Utilities\Business\" />
     <Folder Include="Entities\Concrete\" />
+    <Folder Include="Utilities\Security\" />
+    <Folder Include="Utilities\Security\Hashing\" />
+    <Folder Include="Utilities\Security\Encription\" />
+    <Folder Include="Utilities\Security\JWT\" />
   </ItemGroup>
 </Project>
