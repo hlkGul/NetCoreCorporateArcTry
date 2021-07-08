@@ -30,16 +30,24 @@ namespace Business.Concrete
         //AOP mimarisiyle business icinde business yazacagiz attiribute lar ile yapilir. Spring default saglar
         public IResult Add(Product product)
         {
+
             //business kodu ve validation kodları ayrı yapılmalıdır!!!
             //iş kurallarına dahil edilip edilemeyecegini belirlemek icin validation gereklidir.
+            if (CheckIfProductCountOfCategoryCorrect(product.CategoryId).Success
+            {
+                if (CheckIsProductNameExists(product.ProductName).Success)
+                {
+                    _productDal.Add(product);
+                    return new SuccessResult(Messages.ProductAdded);
+                }
 
+            }
+            return new ErrorResult();
 
             //ValidationTool.Validate(new ProductValidator(), product);
 
-            _productDal.Add(product);
             //IResulttan gelen result ı return ediyoruz.
             //Messages lar sabit olarak iş katmanından gelecek
-            return new Result(true, Messages.ProductAdded);
 
         }
 
@@ -72,7 +80,30 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
         }
+        [ValidationAspect(typeof(ProductValidator))]
 
+        public IResult Update(Product product)
+        {
 
+            _productDal.Update(product);
+            return new Result(true,Messages.ProductAdded);
+        }
+        private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
+        {
+            var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count();
+            if (result >= 10)
+            {
+                return new ErrorResult(Messages.ProductCountOfCategoryError);
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIsProductNameExists(string productName)
+        {
+            if (_productDal.GetAll(p => p.ProductName == productName).Any())
+            {
+                return new ErrorResult(Messages.ProductNameIsSame);
+            }
+            return new SuccessResult();
+        }
     }
 }
