@@ -24,6 +24,8 @@ namespace Business.DependencyResolver.Autofac
             //services.AddSingleton<IProductDal, EfProductDal>();->> same business ->IoC of .netcore 
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
 
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

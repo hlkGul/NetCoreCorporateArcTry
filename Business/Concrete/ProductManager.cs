@@ -13,6 +13,7 @@ using FluentValidation;
 using Business.ValidationRules.FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 
 namespace Business.Concrete
 {
@@ -20,29 +21,36 @@ namespace Business.Concrete
 
     {
         IProductDal _productDal;
+        ICategoryService _categoryService;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
+            _categoryService = categoryService;
         }
         //add metodumuzda validation yok ama aspect ekleyerek bu islemi sagladık. AOP !!
         [ValidationAspect(typeof(ProductValidator))]
         //AOP mimarisiyle business icinde business yazacagiz attiribute lar ile yapilir. Spring default saglar
         public IResult Add(Product product)
         {
+            IResult result = BusinessRules.Run(CheckIfProductCountOfCategoryCorrect(product.CategoryId),
+                CheckIsProductNameExists(product.ProductName),
+                CheckIfCategoryLimitExceded());
+
+               
+
+            if (result != null)
+            {
+                return result;
+            }
+            _productDal.Add(product);
+            return new SuccessResult(Messages.ProductAdded);
+
+
 
             //business kodu ve validation kodları ayrı yapılmalıdır!!!
             //iş kurallarına dahil edilip edilemeyecegini belirlemek icin validation gereklidir.
-            if (CheckIfProductCountOfCategoryCorrect(product.CategoryId).Success
-            {
-                if (CheckIsProductNameExists(product.ProductName).Success)
-                {
-                    _productDal.Add(product);
-                    return new SuccessResult(Messages.ProductAdded);
-                }
 
-            }
-            return new ErrorResult();
 
             //ValidationTool.Validate(new ProductValidator(), product);
 
@@ -102,6 +110,18 @@ namespace Business.Concrete
             if (_productDal.GetAll(p => p.ProductName == productName).Any())
             {
                 return new ErrorResult(Messages.ProductNameIsSame);
+            }
+            return new SuccessResult();
+        }
+        //tek basına servis olmadıgı icin buraya yazıldı categoryManager yerine productın category servisi yorumlama sekli
+        private IResult CheckIfCategoryLimitExceded()
+        {
+            //_categoryService geldiginde bize categoryManager cagıracak. AutoFac ile dependency resolver kısmında cozulecek
+            var result = _categoryService.GetAll();
+            if (result.Data.Count > 15)
+            {
+                return new ErrorResult(Messages.CategoryCountBounded);
+
             }
             return new SuccessResult();
         }
