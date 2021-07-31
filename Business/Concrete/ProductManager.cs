@@ -14,6 +14,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
+using Business.BusinessAspects.Autofac;
 
 namespace Business.Concrete
 {
@@ -31,6 +32,7 @@ namespace Business.Concrete
         //add metodumuzda validation yok ama aspect ekleyerek bu islemi sagladık. AOP !!
         [ValidationAspect(typeof(ProductValidator))]
         //AOP mimarisiyle business icinde business yazacagiz attiribute lar ile yapilir. Spring default saglar
+        [SecuredOperation("product.add")]
         public IResult Add(Product product)
         {
             IResult result = BusinessRules.Run(CheckIfProductCountOfCategoryCorrect(product.CategoryId),

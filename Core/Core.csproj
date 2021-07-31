@@ -32,6 +32,8 @@
     <None Remove="Microsoft.IdentityModel.Tokens" />
     <None Remove="Microsoft.Extensions.Configuration" />
     <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="Extensions\" />
+    <None Remove="Utilities\IoC\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\Interceptors\" />
@@ -44,5 +46,7 @@
     <Folder Include="Utilities\Security\Hashing\" />
     <Folder Include="Utilities\Security\Encription\" />
     <Folder Include="Utilities\Security\JWT\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Utilities\IoC\" />
   </ItemGroup>
 </Project>

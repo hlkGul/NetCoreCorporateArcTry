@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Core.Utilities.Security.Encription;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Core.Extensions;
+using System.Linq;
 
 namespace Core.Utilities.Security.JWT
 {
@@ -24,7 +27,7 @@ namespace Core.Utilities.Security.JWT
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
-            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
+            var signingCredentials = SigningCredentialsHelper.CreateSigningCredantials(securityKey);
             var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);

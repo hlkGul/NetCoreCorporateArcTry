@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Entities.Concrete;
 
 namespace Business.Constants
 {
@@ -20,6 +22,16 @@ namespace Business.Constants
         public static string ProductNameIsSame = "Boyle bir urun ismi zaten bulunmakta";
 
         public static string CategoryCountBounded = "Kategori sayısı maksimum";
-    }
-}
 
+        public static string AuthorizationDenied = "Yetkilendirme Reddedildi.";
+
+        public static string UserRegistered = "Kayıt Olundu.";
+
+        public static string UserNotFound = "Kullanici Bulunamadi.";
+        public static string PasswordError = "Sifre Hatali";
+        public static string SuccessfulLogin = "Basarili Giris";
+        public static string UserAlreadyExists = "Kullanici Zaten Var.";
+        public static string AccessTokenCreated = "Access Token Created";
+    }
+
+}
