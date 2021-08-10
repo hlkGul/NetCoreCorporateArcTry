@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using Core.Entities.Concrete;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-using Core.Utilities.Security.Encription;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using Core.Extensions;
+using Core.Utilities.Security.Encription;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 
 namespace Core.Utilities.Security.JWT
 {
@@ -20,7 +21,7 @@ namespace Core.Utilities.Security.JWT
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();//appsettings ile degerleri map etmemzi saglıyor
+            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
